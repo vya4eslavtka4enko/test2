@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app" v-on:mousemove='onMouseMove($event)'>
+        <p>Счетчик <span>{{counter}}</span><br><span>{{title}}</span></p>
+        <button v-on:click="counterAdd(5,'Увеличено на 5',$event)">Увеличить на 5</button>
+        <button v-on:click="counterAdd(10,'Увеличено на 10',$event)">Увеличить на 10</button>
+
+        <p>X: {{x}}</p>
+        <p>Y: {{y}}</p>
+        <input type="text" v-on:keyup.enter="ValertValue">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                counter: 0,
+                title: '',
+                x: 0,
+                y: 0
+            },
+            methods: {
+                onMouseMove: function (event) {
+                    this.x = event.clientX;
+                    this.y = event.clientY;
+                },
+                counterAdd: function (num, str, event) {
+                    this.counter += num;
+                    this.title = str;
+                    if (num === 5) {
+                        event.target.style.background = 'royalblue'
+                    } else if (num === 10) {
+                        event.target.style.background = "green"
+                    }
+                },
+                ValertValue: function (event) {
+                alert(event.target.value)
+            }
+            },
+        })
+    </script>
+</body>
+
+</html>
